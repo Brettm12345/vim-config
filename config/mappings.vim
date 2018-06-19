@@ -67,6 +67,9 @@ cnoreabbrev Qa qa
 cnoreabbrev Bd bd
 cnoreabbrev bD bd
 
+" Exit insert mode
+inoremap jk <Esc>
+
 " Start new line from any cursor position
 inoremap <S-Return> <C-o>o
 
