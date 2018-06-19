@@ -179,11 +179,6 @@ if dein#tap('vimwiki')
 	nnoremap <silent> <Leader>W :<C-u>VimwikiIndex<CR>
 endif
 
-if dein#tap('vim-choosewin')
-	nmap -         <Plug>(choosewin)
-	nmap <Leader>- :<C-u>ChooseWinSwapStay<CR>
-endif
-
 if dein#tap('jedi-vim')
 	let g:jedi#completions_command = ''
 	let g:jedi#documentation_command = 'K'
