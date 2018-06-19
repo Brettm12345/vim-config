@@ -21,10 +21,6 @@ if get(g:, 'elite_mode')
 	nnoremap <Right> :vertical resize -2<CR>
 endif
 
-" Double leader key for toggling visual-line mode
-nmap <silent> <Leader><Leader> V
-vmap <Leader><Leader> <Esc>
-
 " Change current word in a repeatable manner
 nnoremap cn *``cgn
 nnoremap cN *``cgN

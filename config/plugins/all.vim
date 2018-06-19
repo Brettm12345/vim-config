@@ -3,25 +3,25 @@
 "---------------------------------------------------------
 
 if dein#tap('denite.nvim')
-	nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-	nnoremap <silent><LocalLeader>f :<C-u>Denite file_rec<CR>
-	nnoremap <silent><LocalLeader>b :<C-u>Denite buffer file_old -default-action=switch<CR>
-	nnoremap <silent><LocalLeader>d :<C-u>Denite directory_rec -default-action=cd<CR>
-	nnoremap <silent><LocalLeader>v :<C-u>Denite register -buffer-name=register<CR>
-	xnoremap <silent><LocalLeader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
-	nnoremap <silent><LocalLeader>l :<C-u>Denite location_list -buffer-name=list<CR>
-	nnoremap <silent><LocalLeader>q :<C-u>Denite quickfix -buffer-name=list<CR>
-	nnoremap <silent><LocalLeader>n :<C-u>Denite dein<CR>
-	nnoremap <silent><LocalLeader>g :<C-u>Denite grep<CR>
-	nnoremap <silent><LocalLeader>j :<C-u>Denite jump change file_point<CR>
-	nnoremap <silent><LocalLeader>o :<C-u>Denite outline<CR>
-	nnoremap <silent><LocalLeader>s :<C-u>Denite session -buffer-name=list<CR>
-	nnoremap <silent><expr> <LocalLeader>t &filetype == 'help' ? "g\<C-]>" :
+	nnoremap <silent><Leader>r :<C-u>Denite -resume -refresh<CR>
+	nnoremap <silent><Leader><Leader> :<C-u>Denite file_rec<CR>
+	nnoremap <silent><Leader>b :<C-u>Denite buffer file_old -default-action=switch<CR>
+	nnoremap <silent><Leader>d :<C-u>Denite directory_rec -default-action=cd<CR>
+	nnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register<CR>
+	xnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
+	nnoremap <silent><Leader>l :<C-u>Denite location_list -buffer-name=list<CR>
+	nnoremap <silent><Leader>q :<C-u>Denite quickfix -buffer-name=list<CR>
+	nnoremap <silent><Leader>n :<C-u>Denite dein<CR>
+	nnoremap <silent><Leader>g :<C-u>Denite grep<CR>
+	nnoremap <silent><Leader>j :<C-u>Denite jump change file_point<CR>
+	nnoremap <silent><Leader>o :<C-u>Denite outline<CR>
+	nnoremap <silent><Leader>s :<C-u>Denite session -buffer-name=list<CR>
+	nnoremap <silent><expr> <Leader>t &filetype == 'help' ? "g\<C-]>" :
 		\ ":\<C-u>DeniteCursorWord -buffer-name=tag
 		\  tag:include\<CR>"
 	nnoremap <silent><expr> <LocalLeader>p  &filetype == 'help' ?
 		\ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
-	nnoremap <silent><LocalLeader>h :<C-u>Denite help<CR>
+	nnoremap <silent><Leader>h :<C-u>Denite help<CR>
 	nnoremap <silent><LocalLeader>m :<C-u>Denite mpc -buffer-name=mpc<CR>
 	nnoremap <silent><LocalLeader>/ :<C-u>Denite line<CR>
 	nnoremap <silent><LocalLeader>* :<C-u>DeniteCursorWord line<CR>
