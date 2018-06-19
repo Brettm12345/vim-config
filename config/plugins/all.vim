@@ -333,4 +333,12 @@ if dein#tap('vim-textobj-function')
 	xmap <silent> if <Plug>(textobj-function-i)
 endif
 
+if dein#tap('vim-unimpaired')
+	nmap ] <Plug>unimpaired
+	nmap [ <Plug>unimpaired
+endif
+if dein#tap('vim-vinegar')
+	nmap - <Plug>VinegarUp
+endif
+
 " vim: set ts=2 sw=2 tw=80 noet :

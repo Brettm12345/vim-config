@@ -147,6 +147,8 @@
 - { repo: jreybert/vimagit, on_cmd: Magit }
 - { repo: tweekmonster/helpful.vim, on_cmd: HelpfulVersion }
 - { repo: lambdalisue/gina.vim, on_cmd: Gina }
+- { repo: tpope/vim-vinegar, on_map: <Plug>Vinegar }
+- { repo: tpope/vim-unimpaired, on_map: { n: <Plug> } }
 
 - repo: mzlogin/vim-markdown-toc
   on_cmd: [ GenTocGFM, GenTocRedcarpet, GenTocGitLab, UpdateToc ]
