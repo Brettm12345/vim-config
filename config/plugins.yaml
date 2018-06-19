@@ -105,9 +105,6 @@
 - { repo: tmhedberg/SimpylFold, on_ft: python }
 - { repo: raimon49/requirements.txt.vim, on_ft: requirements }
 
-- { repo: StanAngeloff/php.vim, on_ft: php }
-- { repo: shawncplus/phpcomplete.vim, on_ft: php, on_i: 1 }
-
 - { repo: tbastos/vim-lua, on_ft: lua }
 - { repo: osyo-manga/vim-monster, on_ft: ruby }
 - { repo: toyamarinyon/vim-swift, on_ft: swift }
