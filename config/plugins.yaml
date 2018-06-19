@@ -276,10 +276,10 @@
     \   { 'diary_header': 'Diary',
     \     'diary_link_fmt': '%Y-%m/%d',
     \     'auto_toc': 1,
-    \     'path': '~/docs/wiki/',
+    \     'path': '~/usr/doc/wiki/',
     \     'syntax': 'markdown',
     \     'ext': '.md' },
-    \   { 'path': '~/docs/blog/',
+    \   { 'path': '~/usr/doc/blog/',
     \     'syntax': 'markdown',
     \     'ext': '.md' }
     \ ]
