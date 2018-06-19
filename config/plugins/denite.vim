@@ -41,14 +41,13 @@ call denite#custom#source(
 	\ 'converters', ['converter_relative_word'])
 
 " FIND and GREP COMMANDS
-if executable('ag')
+if executable('rg')
 	" The Silver Searcher
 	call denite#custom#var('file_rec', 'command',
-		\ ['ag', '-U', '--hidden', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-	" Setup ignore patterns in your .agignore file!
-	" https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
-
+		\ ['fd', '--type', 'f',
+		\ '--ignore-file', $HOME.'/.config/fd/ignore',
+		\ '--color', 'never',
+		\ '--follow', '--hidden', ''])
 	call denite#custom#var('grep', 'command', ['ag'])
 	call denite#custom#var('grep', 'recursive_opts', [])
 	call denite#custom#var('grep', 'pattern_opt', [])
