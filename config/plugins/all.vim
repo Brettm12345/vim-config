@@ -29,9 +29,9 @@ if dein#tap('denite.nvim')
 	nnoremap <silent><LocalLeader>; :<C-u>Denite command command_history<CR>
 
 	" chemzqm/denite-git
-	nnoremap <silent> <Leader>gl :<C-u>Denite gitlog:all<CR>
-	nnoremap <silent> <Leader>gs :<C-u>Denite gitstatus<CR>
-	nnoremap <silent> <Leader>gc :<C-u>Denite gitbranch<CR>
+	nnoremap <silent> <Localleader>gl :<C-u>Denite gitlog:all<CR>
+	nnoremap <silent> <Localleader>gs :<C-u>Denite gitstatus<CR>
+	nnoremap <silent> <Localleader>gc :<C-u>Denite gitbranch<CR>
 
 	" Open Denite with word under cursor or selection
 	nnoremap <silent> <Leader>gf :DeniteCursorWord file_rec<CR>
@@ -130,8 +130,8 @@ if dein#tap('vim-quickhl')
 endif
 
 if dein#tap('vim-sidemenu')
-	nmap <Leader>l <Plug>(sidemenu)
-	xmap <Leader>l <Plug>(sidemenu-visual)
+	nmap <Localleader>l <Plug>(sidemenu)
+	xmap <Localleader>l <Plug>(sidemenu-visual)
 endif
 
 if dein#tap('vim-indent-guides')
