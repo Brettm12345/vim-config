@@ -16,6 +16,16 @@
     autocmd MyAutoCmd FileType denite,qf,nerdtree let b:cursorword=0
     autocmd MyAutoCmd InsertEnter * let b:cursorword=0
     autocmd MyAutoCmd InsertLeave * let b:cursorword=1
+- repo: rakr/vim-one
+  hook_add: |
+    set background=dark
+    let g:one_allow_italics = 1
+    colorscheme one
+- repo: vim-airline/vim-airline
+  hook_add: |
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#show_buffers = 1
 
 # Lazy Loading
 # ==========================================
