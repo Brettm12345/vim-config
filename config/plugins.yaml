@@ -135,7 +135,6 @@
 
 - { repo: Xuyuanp/nerdtree-git-plugin, on_source: nerdtree }
 - { repo: tpope/vim-commentary, on_map: <Plug>Commentary }
-- { repo: t9md/vim-choosewin, on_map: { n: <Plug> }}
 - { repo: Shougo/vinarise.vim, on_cmd: Vinarise }
 - { repo: kana/vim-niceblock, on_map: { x: <Plug> }}
 - { repo: guns/xterm-color-table.vim, on_cmd: XtermColorTable }
