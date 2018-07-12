@@ -1,4 +1,3 @@
-
 " denite.nvim
 " -----------
 
@@ -19,6 +18,8 @@ call denite#custom#option('mpc', {
 	\ 'quit': 0,
 	\ 'mode': 'normal',
 	\ 'winheight': 20,
+	\ 'host': 'localhost',
+	\ 'port': 660
 	\ })
 
 " MATCHERS
@@ -26,47 +27,28 @@ call denite#custom#option('mpc', {
 call denite#custom#source('tag', 'matchers', ['matcher_substring'])
 if has('nvim') && &runtimepath =~# '\/cpsm'
 	call denite#custom#source(
-		\ 'buffer,file_mru,file_old,file_rec,grep,mpc,line',
-		\ 'matchers', ['matcher_cpsm', 'matcher_fuzzy'])
+		\ 'buffer,file/old,file/rec,grep,mpc,line',
+		\ 'matchers', ['matcher/cpsm', 'matcher/fuzzy'])
 endif
-
-" SORTERS
-" Default is 'sorter_rank'
-call denite#custom#source('z', 'sorters', ['sorter_z'])
 
 " CONVERTERS
 " Default is none
 call denite#custom#source(
-	\ 'buffer,file_mru,file_old',
-	\ 'converters', ['converter_relative_word'])
+	\ 'buffer,file/old',
+	\ 'converters', ['converter/relative_word'])
 
-" FIND and GREP COMMANDS
-if executable('rg')
-	" The Silver Searcher
-	call denite#custom#var('file_rec', 'command',
-		\ ['fd', '--type', 'f',
-		\ '--ignore-file', $HOME.'/.config/fd/ignore',
-		\ '--color', 'never',
-		\ '--follow', '--hidden', ''])
-	call denite#custom#var('grep', 'command', ['ag'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', [])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-	call denite#custom#var('grep', 'default_opts',
-		\ [ '--skip-vcs-ignores', '--vimgrep', '--smart-case', '--hidden' ])
-
-elseif executable('ack')
-	" Ack command
-	call denite#custom#var('grep', 'command', ['ack'])
-	call denite#custom#var('grep', 'recursive_opts', [])
-	call denite#custom#var('grep', 'pattern_opt', ['--match'])
-	call denite#custom#var('grep', 'separator', ['--'])
-	call denite#custom#var('grep', 'final_opts', [])
-	call denite#custom#var('grep', 'default_opts',
-			\ ['--ackrc', $HOME.'/.config/ackrc', '-H',
-			\ '--nopager', '--nocolor', '--nogroup', '--column'])
-endif
+call denite#custom#var('file/rec', 'command',
+	\ ['fd', '--type', 'f',
+	\ '--ignore-file', $HOME.'/.config/git/gitignore',
+	\ '--color', 'never',
+	\ '--follow', '--hidden', ''])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', 'default_opts',
+	\ ['--vimgrep', '--no-heading'])
 
 " KEY MAPPINGS
 let insert_mode_mappings = [

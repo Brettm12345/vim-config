@@ -7,6 +7,8 @@ set modeline                 " automatically setting options from modelines
 set report=0                 " Don't report on line changes
 set errorbells               " Trigger bell on error
 set visualbell               " Use visual bell instead of beeping
+set lazyredraw               " Improve performance
+set ttyfast                  " Improve performance
 set hidden                   " hide buffers when abandoned instead of unload
 set fileformats=unix,dos,mac " Use Unix as the standard file type
 set magic                    " For regular expressions turn magic on
@@ -150,6 +152,7 @@ set shortmess=aoOTI     " Shorten messages and don't show intro
 set scrolloff=2         " Keep at least 2 lines above/below
 set sidescrolloff=5     " Keep at least 5 lines left/right
 set number              " Show line numbers
+set relativenumber      " Show relative line numbers
 set noruler             " Disable default status ruler
 set list                " Show hidden characters
 

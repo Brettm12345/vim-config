@@ -39,7 +39,7 @@ nnoremap <leader>a =ip
 nnoremap <CR> za
 
 " Focus the current fold by closing all others
-nnoremap <S-Return> zMza
+nnoremap <C-Space> zMza
 
 " Use backspace key for matchit.vim
 nmap <BS> %
@@ -189,19 +189,6 @@ function! s:get_selection(cmdtype) "{{{
 	let @s = temp
 endfunction "}}}
 
-function! s:toggle_contrast(delta)
-	let l:scheme = ''
-	if g:colors_name =~# 'solarized8'
-		let l:schemes = map(['_low', '_flat', '', '_high'],
-			\ '"solarized8_".(&background).v:val')
-		let l:contrast = ((a:delta + index(l:schemes, g:colors_name)) % 4 + 4) % 4
-		let l:scheme = l:schemes[l:contrast]
-	endif
-	if l:scheme !=# ''
-		execute 'colorscheme' l:scheme
-	endif
-endfunction
-
 " Location list movement
 nmap <Leader>j :lnext<CR>
 nmap <Leader>k :lprev<CR>
@@ -227,32 +214,6 @@ noremap  mj :m+<CR>
 " Session management shortcuts
 nmap <silent> <Leader>se :<C-u>execute 'SessionSave' fnamemodify(resolve(getcwd()), ':p:gs?/?_?')<CR>
 nmap <silent> <Leader>os :<C-u>execute 'source '.g:session_directory.'/'.fnamemodify(resolve(getcwd()), ':p:gs?/?_?').'.vim'<CR>
-
-if has('mac')
-	" Open the macOS dictionary on current word
-	nmap <Leader>? :!open dict://<cword><CR><CR>
-
-	" Use Marked for real-time Markdown preview
-	if executable('/Applications/Marked 2.app/Contents/MacOS/Marked 2')
-		autocmd MyAutoCmd FileType markdown
-			\ nmap <buffer><Leader>P :silent !open -a Marked\ 2.app '%:p'<CR>
-	endif
-
-	" Use Dash on Mac, for context help
-	if executable('/Applications/Dash.app/Contents/MacOS/Dash')
-		autocmd MyAutoCmd FileType ansible,go,php,css,less,html,markdown
-			\ nmap <silent><buffer> K :!open -g dash://"<C-R>=split(&ft, '\.')[0]<CR>:<cword>"&<CR><CR>
-		autocmd MyAutoCmd FileType javascript,javascript.jsx,sql,ruby,conf,sh
-			\ nmap <silent><buffer> K :!open -g dash://"<cword>"&<CR><CR>
-	endif
-
-" Use Zeal on Linux for context help
-elseif executable('zeal')
-	autocmd MyAutoCmd FileType ansible,go,php,css,less,html,markdown
-		\ nmap <silent><buffer> K :!zeal --query "<C-R>=split(&ft, '\.')[0]<CR>:<cword>"&<CR><CR>
-	autocmd MyAutoCmd FileType javascript,javascript.jsx,sql,ruby,conf,sh
-		\ nmap <silent><buffer> K :!zeal --query "<cword>"&<CR><CR>
-endif
 
 " }}}
 

@@ -12,7 +12,7 @@ endif
 
 " Set main configuration directory, and where cache is stored.
 let $VIMPATH = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
-let $VARPATH = expand(($XDG_CACHE_HOME ? $XDG_CACHE_HOME : '~/.cache').'/vim')
+let $VARPATH = expand(($XDG_CACHE_HOME ?  '~/.cache' : $XDG_CACHE_HOME).'/vim')
 
 let g:dein#install_max_processes = 16
 let g:dein#install_progress_type = 'echo'

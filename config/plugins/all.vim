@@ -4,8 +4,8 @@
 
 if dein#tap('denite.nvim')
 	nnoremap <silent><Leader>r :<C-u>Denite -resume -refresh<CR>
-	nnoremap <silent><Leader><Leader> :<C-u>Denite file_rec<CR>
-	nnoremap <silent><Leader>b :<C-u>Denite buffer file_old -default-action=switch<CR>
+	nnoremap <silent><Leader><Leader> :<C-u>Denite file/rec<CR>
+	nnoremap <silent><Leader>b :<C-u>Denite buffer file/old -default-action=switch<CR>
 	nnoremap <silent><Leader>d :<C-u>Denite directory_rec -default-action=cd<CR>
 	nnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register<CR>
 	xnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
@@ -22,11 +22,10 @@ if dein#tap('denite.nvim')
 	nnoremap <silent><expr> <LocalLeader>p  &filetype == 'help' ?
 		\ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
 	nnoremap <silent><Leader>h :<C-u>Denite help<CR>
+	nnoremap <silent><Leader>/ :<C-u>Denite line<CR>
+	nnoremap <silent><Leader>* :<C-u>DeniteCursorWord line<CR>
+	nnoremap <silent><Leader>; :<C-u>Denite command command_history<CR>
 	nnoremap <silent><LocalLeader>m :<C-u>Denite mpc -buffer-name=mpc<CR>
-	nnoremap <silent><LocalLeader>/ :<C-u>Denite line<CR>
-	nnoremap <silent><LocalLeader>* :<C-u>DeniteCursorWord line<CR>
-	nnoremap <silent><LocalLeader>z :<C-u>Denite z<CR>
-	nnoremap <silent><LocalLeader>; :<C-u>Denite command command_history<CR>
 
 	" chemzqm/denite-git
 	nnoremap <silent> <Localleader>gl :<C-u>Denite gitlog:all<CR>
@@ -34,7 +33,7 @@ if dein#tap('denite.nvim')
 	nnoremap <silent> <Localleader>gc :<C-u>Denite gitbranch<CR>
 
 	" Open Denite with word under cursor or selection
-	nnoremap <silent> <Leader>gf :DeniteCursorWord file_rec<CR>
+	nnoremap <silent> <Leader>gf :DeniteCursorWord file/rec<CR>
 	nnoremap <silent> <Leader>gg :DeniteCursorWord grep<CR>
 	vnoremap <silent> <Leader>gg
 		\ :<C-u>call <SID>get_selection('/')<CR>
@@ -45,16 +44,12 @@ if dein#tap('denite.nvim')
 		normal! gv"sy
 		let @/ = substitute(escape(@s, '\'.a:cmdtype), '\n', '\\n', 'g')
 		let @s = temp
-	endfunction "}}}
+	endfunction
 endif
 
-if dein#tap('vim-denite-z')
-	command! -nargs=+ -complete=file Z
-		\ call denite#start([{'name': 'z', 'args': [<q-args>], {'immediately': 1}}])
-endif
 
 if dein#tap('tagbar')
-	nnoremap <silent> <Leader>o   :<C-u>TagbarOpenAutoClose<CR>
+	nnoremap <silent> <LocalLeader>o   :<C-u>TagbarOpenAutoClose<CR>
 
 	" Also use h/l to open/close folds
 	let g:tagbar_map_closefold = ['h', '-', 'zc']
@@ -221,9 +216,6 @@ endif
 
 if dein#tap('vimagit')
 	nnoremap <silent> mg :Magit<CR>
-
-	" autocmd MyAutoCmd FileType magit
-	" 	\ nnoremap <silent><buffer> <CR> za
 endif
 
 if dein#tap('vim-easygit')
@@ -273,8 +265,8 @@ endif
 if dein#tap('splitjoin.vim')
 	let g:splitjoin_join_mapping = ''
 	let g:splitjoin_split_mapping = ''
-	nmap sj :SplitjoinJoin<CR>
-	nmap sk :SplitjoinSplit<CR>
+	nmap gS :SplitjoinJoin<CR>
+	nmap gJ :SplitjoinSplit<CR>
 endif
 
 if dein#tap('linediff.vim')
@@ -306,8 +298,8 @@ if dein#tap('vim-easymotion')
 	nmap sf <Plug>(easymotion-overwin-f)
 	map  sh <Plug>(easymotion-linebackward)
 	map  sl <Plug>(easymotion-lineforward)
-	" map  sj <Plug>(easymotion-j)
-	" map  sk <Plug>(easymotion-k)
+	map  sj <Plug>(easymotion-j)
+	map  sk <Plug>(easymotion-k)
 	map  s/ <Plug>(easymotion-sn)
 	omap s/ <Plug>(easymotion-tn)
 	map  sn <Plug>(easymotion-next)
@@ -328,10 +320,6 @@ if dein#tap('vim-textobj-function')
 	xmap <silent> if <Plug>(textobj-function-i)
 endif
 
-if dein#tap('vim-unimpaired')
-	nmap ] <Plug>unimpaired
-	nmap [ <Plug>unimpaired
-endif
 if dein#tap('vim-vinegar')
 	nmap - <Plug>VinegarUp
 endif

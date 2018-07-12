@@ -5,27 +5,21 @@
 # Startup
 # -------
 - repo: Shougo/dein.vim
+- repo: NerdyPepper/agila.vim
 - repo: thinca/vim-localrc
+- repo: rafi/vim-badge
 - repo: christoomey/vim-tmux-navigator
 - repo: junegunn/vim-peekaboo
+- repo: tpope/vim-unimpaired
 - repo: tpope/vim-sleuth
 - repo: itchyny/vim-gitbranch
+- repo: drzel/vim-line-no-indicator
 - repo: itchyny/vim-parenmatch
 - repo: itchyny/vim-cursorword
   hook_add: |
     autocmd MyAutoCmd FileType denite,qf,nerdtree let b:cursorword=0
     autocmd MyAutoCmd InsertEnter * let b:cursorword=0
     autocmd MyAutoCmd InsertLeave * let b:cursorword=1
-- repo: rakr/vim-one
-  hook_add: |
-    set background=dark
-    let g:one_allow_italics = 1
-    colorscheme one
-- repo: vim-airline/vim-airline
-  hook_add: |
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#show_buffers = 1
 
 # Lazy Loading
 # ==========================================
@@ -37,12 +31,6 @@
 - { repo: cakebaker/scss-syntax.vim, on_ft: [ scss, sass ]}
 - { repo: groenewege/vim-less, on_ft: less }
 - { repo: othree/csscomplete.vim, on_ft: css }
-
-- { repo: mitsuhiko/vim-jinja, on_ft: [ htmljinja, jinja ]}
-- { repo: mustache/vim-mustache-handlebars, on_ft: html }
-
-- repo: pearofducks/ansible-vim
-  on_ft: [ ansible, ansible_hosts, ansible_template ]
 
 - repo: othree/html5.vim
   on_ft: html
@@ -88,13 +76,6 @@
 - { repo: moll/vim-node, on_ft: [ javascript, jsx, javascript.jsx ] }
 - { repo: elzr/vim-json, on_ft: json }
 
-# pangloss/javascript vs. othree/yajs
-#- { repo: othree/yajs.vim, on_ft: [ javascript, jsx, javascript.jsx ]}
-#- { repo: gavocanov/vim-js-indent, on_ft: [ javascript, jsx, javascript.jsx ]}
-#- repo: mxw/vim-jsx
-#  on_ft: [ javascript, jsx, javascript.jsx ]
-#  hook_source: let g:jsx_ext_required = 0
-
 - repo: fatih/vim-go
   on_ft: go
   hook_source: |
@@ -104,36 +85,21 @@
     let g:go_highlight_extra_types = 1
     let g:go_highlight_operators = 1
 
-- repo: nhooyr/neoman.vim
-  on_cmd: Nman
-  on_ft: neoman
-  hook_add: au BufEnter neoman set noro
-
+- { repo: bfrg/vim-cpp-modern, on_ft: [ c, cpp ]}
 - { repo: vim-python/python-syntax, on_ft: python }
 - { repo: Vimjas/vim-python-pep8-indent, on_ft: python }
 - { repo: vim-scripts/python_match.vim, on_ft: python }
 - { repo: tmhedberg/SimpylFold, on_ft: python }
 - { repo: raimon49/requirements.txt.vim, on_ft: requirements }
-
-- { repo: tbastos/vim-lua, on_ft: lua }
-- { repo: osyo-manga/vim-monster, on_ft: ruby }
-- { repo: toyamarinyon/vim-swift, on_ft: swift }
 - { repo: vim-jp/syntax-vim-ex, on_ft: vim }
-
-- { repo: chrisbra/csv.vim, on_ft: csv }
 - { repo: tpope/vim-git, on_ft: [ gitcommit, gitrebase, gitconfig ]}
 - { repo: ekalinin/Dockerfile.vim, on_ft: [ Dockerfile, docker-compose ]}
 - { repo: tmux-plugins/vim-tmux, on_ft: tmux }
-- { repo: andreshazard/vim-logreview, on_ft: logreview }
-
 - { repo: cespare/vim-toml, on_ft: toml }
 - { repo: PotatoesMaster/i3-vim-syntax, on_ft: i3 }
 - { repo: dag/vim-fish, on_ft: fish }
-- { repo: jstrater/mpvim, on_ft: portfile }
-- { repo: robbles/logstash.vim, on_ft: logstash }
-- { repo: exu/pgsql.vim, on_ft: pgsql }
 - { repo: othree/nginx-contrib-vim, on_ft: nginx }
-- { repo: IN3D/vim-raml, on_ft: raml }
+- { repo: baskerville/vim-sxhkdrc, on_ft: sxhkdrc }
 
 # ==========================================
 # Commands
@@ -157,7 +123,6 @@
 - { repo: tweekmonster/helpful.vim, on_cmd: HelpfulVersion }
 - { repo: lambdalisue/gina.vim, on_cmd: Gina }
 - { repo: tpope/vim-vinegar, on_map: <Plug>Vinegar }
-- { repo: tpope/vim-unimpaired, on_map: { n: <Plug> } }
 
 - repo: mzlogin/vim-markdown-toc
   on_cmd: [ GenTocGFM, GenTocRedcarpet, GenTocGitLab, UpdateToc ]
@@ -184,11 +149,6 @@
     if executable('jsctags')
       let g:tagbar_type_javascript = { 'ctagsbin': 'jsctags' }
     endif
-
-- repo: beloglazov/vim-online-thesaurus
-  if: empty($VIM_MINIMAL)
-  on_cmd: [ OnlineThesaurusCurrentWord, Thesaurus ]
-  hook_source: let g:online_thesaurus_map_keys = 0
 
 # ==========================================
 # Interface
@@ -263,35 +223,6 @@
 - repo: junegunn/limelight.vim
   if: empty($VIM_MINIMAL)
   on_cmd: Limelight
-
-- repo: itchyny/calendar.vim
-  if: empty($VIM_MINIMAL)
-  on_cmd: Calendar
-  hook_source: |
-    let g:calendar_google_calendar = 1
-    let g:calendar_google_task = 1
-
-- repo: vimwiki/vimwiki
-  if: empty($VIM_MINIMAL)
-  on_map: { n: <Plug> }
-  on_cmd: Vimwiki
-  hook_add: |
-    let g:vimwiki_use_calendar = 1
-    let g:vimwiki_hl_headers = 1
-    let g:vimwiki_hl_cb_checked = 1
-    let g:vimwiki_autowriteall = 0
-  hook_source: |
-    let g:vimwiki_list = [
-    \   { 'diary_header': 'Diary',
-    \     'diary_link_fmt': '%Y-%m/%d',
-    \     'auto_toc': 1,
-    \     'path': '~/usr/doc/wiki/',
-    \     'syntax': 'markdown',
-    \     'ext': '.md' },
-    \   { 'path': '~/usr/doc/blog/',
-    \     'syntax': 'markdown',
-    \     'ext': '.md' }
-    \ ]
 
 # ==========================================
 # Completion
@@ -427,15 +358,10 @@
   on_cmd: Denite
   hook_source: source $VIMPATH/config/plugins/denite.vim
 
+- { repo: nixprime/cpsm, on_source: denite.nvim }
 - { repo: chemzqm/unite-location, on_source: denite.nvim }
 - { repo: chemzqm/denite-git, on_source: denite.nvim }
-- { repo: rafi/vim-denite-z, on_source: denite.nvim }
 - { repo: rafi/vim-denite-session, on_source: denite.nvim }
-
-- repo: rafi/vim-denite-mpc
-  if: executable('mpc') && empty($VIM_MINIMAL)
-  on_source: denite.nvim
-  hook_source: call denite#custom#var('mpc', 'default_view', 'date')
 
 # ==========================================
 # Operators

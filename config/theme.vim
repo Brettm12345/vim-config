@@ -1,4 +1,3 @@
-
 " Theme
 " -----
 
@@ -6,9 +5,9 @@
 set t_Co=256
 
 " Enable true color
-if has('termguicolors')
-	set termguicolors
-endif
+" if has('termguicolors')
+" 	set termguicolors
+" endif
 
 if has('gui_running')
 	set background=dark
@@ -26,8 +25,8 @@ function! s:theme_reload(name)
 endfunction
 
 " THEME NAME
-let g:theme_name = 'rafi-2017'
-" autocmd MyAutoCmd ColorScheme * call s:theme_reload(g:theme_name)
+let g:theme_name = 'brett'
+autocmd MyAutoCmd ColorScheme * call s:theme_reload(g:theme_name)
 
 " COLORSCHEME NAME
 let s:cache = $VARPATH.'/theme.txt'
