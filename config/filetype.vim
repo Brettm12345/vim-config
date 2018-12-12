@@ -9,15 +9,12 @@ execute 'autocmd MyAutoCmd BufWritePost '.$VIMPATH.'/config/*,vimrc nested'
 
 augroup MyAutoCmd " {{{
 
-	" Reset cursor when vim is closed
+	" Reset the cursor when leaving vim
 	autocmd VimLeave * set guicursor=a:ver100-iCursor
 
 	" Highlight current line only on focused window
-	autocmd WinEnter,InsertLeave * set cursorline
+	autocmd VimEnter,WinEnter,BufWinEnter,BufEnter,InsertLeave * set cursorline
 	autocmd WinLeave,InsertEnter * set nocursorline
-
-	" Automatically set read-only for files being edited elsewhere
-	autocmd SwapExists * nested let v:swapchoice = 'o'
 
 	" Check if file changed when its window is focus, more eager than 'autoread'
 	autocmd WinEnter,FocusGained * checktime
@@ -46,8 +43,8 @@ augroup MyAutoCmd " {{{
 
 	" Disable paste and/or update diff when leaving insert mode
 	autocmd InsertLeave *
-			\ if &paste | setlocal nopaste mouse=a | echo 'nopaste' | endif |
-			\ if &l:diff | diffupdate | endif
+		\ if &paste | setlocal nopaste mouse=a | echo 'nopaste' | endif |
+	\ if &l:diff | diffupdate | endif
 
 	autocmd TabLeave * let g:lasttab = tabpagenr()
 
@@ -65,6 +62,8 @@ augroup MyAutoCmd " {{{
 	autocmd FileType html,css,javascript,jsx,javascript.jsx setlocal backupcopy=yes
 
 	autocmd FileType zsh setlocal foldenable foldmethod=marker
+
+	autocmd FileType fzf setlocal laststatus=0 noshowmode noruler
 
 	autocmd FileType html
 		\ setlocal path+=./;/
@@ -127,8 +126,8 @@ let g:markdown_fenced_languages = [
 " Folding {{{
 " augroup: a
 " function: f
-let g:vimsyn_folding = 'af'
 let g:tex_fold_enabled = 1
+let g:ft_man_folding_enable = 1
 let g:xml_syntax_folding = 1
 " }}}
 " }}}

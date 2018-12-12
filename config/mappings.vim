@@ -97,8 +97,6 @@ xnoremap > >gv|
 " Use tab for indenting in visual mode
 vnoremap <Tab> >gv|
 vnoremap <S-Tab> <gv
-nnoremap > >>_
-nnoremap < <<_
 
 " Select last paste
 nnoremap <expr> gp '`['.strpart(getregtype(), 0, 1).'`]'
@@ -129,10 +127,6 @@ vnoremap <silent><Leader>w <Esc>:write<CR>
 nnoremap <silent><C-s> :<C-u>write<CR>
 vnoremap <silent><C-s> :<C-u>write<CR>
 cnoremap <silent><C-s> <C-u>write<CR>
-
-" Save a file with sudo
-" http://forrst.com/posts/Use_w_to_sudo_write_a_file_with_Vim-uAN
-cmap W!! w !sudo tee % >/dev/null
 
 " }}}
 " Editor UI {{{
@@ -285,4 +279,4 @@ function! OpenChangedFiles()
 	endfor
 endfunction
 
-" vim: set ts=2 sw=2 tw=80 noet :
+" vim: set ts=2 sw=2 tw=80 foldmethod=marker noet :

@@ -1,6 +1,9 @@
 
 " Neomake
 " ---------
+
+call neomake#configure#automake('nw')
+
 let g:neomake_open_list = 0
 let g:neomake_verbose = 1
 let g:airline#extensions#neomake#enabled = 0
