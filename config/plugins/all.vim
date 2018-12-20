@@ -2,6 +2,69 @@
 " Plugin Settings
 "---------------------------------------------------------
 
+if dein#tap('denite.nvim')
+	nnoremap <silent><Leader>r :<C-u>Denite -resume -refresh<CR>
+	nnoremap <silent><Leader><Leader> :<C-u>Denite file/rec<CR>
+	nnoremap <silent><Leader>b :<C-u>Denite buffer file/old -default-action=switch<CR>
+	nnoremap <silent><Leader>d :<C-u>Denite directory_rec -default-action=cd<CR>
+	nnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register<CR>
+	xnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
+	nnoremap <silent><Leader>l :<C-u>Denite location_list -buffer-name=list<CR>
+	nnoremap <silent><Leader>q :<C-u>Denite quickfix -buffer-name=list<CR>
+	nnoremap <silent><Leader>n :<C-u>Denite dein<CR>
+	nnoremap <silent><Leader>g :<C-u>Denite grep<CR>
+	nnoremap <silent><Leader>j :<C-u>Denite jump change file/point<CR>
+	nnoremap <silent><Leader>u :<C-u>Denite junkfile:new junkfile<CR>
+	nnoremap <silent><Leader>o :<C-u>Denite outline<CR>
+	nnoremap <silent><Leader>s :<C-u>Denite session -buffer-name=list<CR>
+	nnoremap <silent><Leader>t :<C-u>Denite -buffer-name=tag tag:include<CR>
+	nnoremap <silent><Leader>p :<C-u>Denite -mode=normal jump<CR>
+	nnoremap <silent><Leader>h :<C-u>Denite help<CR>
+	nnoremap <silent><Leader>m :<C-u>Denite mpc -buffer-name=mpc<CR>
+	nnoremap <silent><Leader>/ :<C-u>Denite line<CR>
+	nnoremap <silent><Leader>* :<C-u>DeniteCursorWord line<CR>
+	nnoremap <silent><Leader>z :<C-u>Denite z<CR>
+	nnoremap <silent><Leader>; :<C-u>Denite command command_history<CR>
+
+	" chemzqm/denite-git
+	nnoremap <silent> <Leader>gl :<C-u>Denite gitlog:all<CR>
+	nnoremap <silent> <Leader>gs :<C-u>Denite gitstatus<CR>
+	nnoremap <silent> <Leader>gc :<C-u>Denite gitbranch<CR>
+
+	" Open Denite with word under cursor or selection
+	nnoremap <silent> <Leader>gt :DeniteCursorWord -buffer-name=tag tag:include<CR>
+	nnoremap <silent> <Leader>gf :DeniteCursorWord file/rec<CR>
+	nnoremap <silent> <Leader>gg :DeniteCursorWord grep<CR>
+	vnoremap <silent> <Leader>gg
+		\ :<C-u>call <SID>get_selection('/')<CR>
+		\ :execute 'Denite grep:::'.@/<CR><CR>
+
+	function! s:get_selection(cmdtype)
+		let temp = @s
+		normal! gv"sy
+		let @/ = substitute(escape(@s, '\'.a:cmdtype), '\n', '\\n', 'g')
+		let @s = temp
+	endfunction "}}}
+endif
+
+if dein#tap('vim-denite-z')
+	command! -nargs=+ -complete=file Z
+		\ call denite#start([{'name': 'z', 'args': [<q-args>], {'immediately': 1}}])
+endif
+
+if dein#tap('tagbar')
+	nnoremap <silent> <Leader>ot   :<C-u>TagbarOpenAutoClose<CR>
+
+	" Also use h/l to open/close folds
+	let g:tagbar_map_closefold = ['h', '-', 'zc']
+	let g:tagbar_map_openfold = ['l', '+', 'zo']
+endif
+
+if dein#tap('defx.nvim')
+	nmap <silent>-
+		\ :<C-u>Defx -columns=icons:git:filename:type -buffer-name=tab`tabpagenr()`<CR>
+endif
+
 if dein#tap('fzf.vim')
 	nnoremap <silent><Leader><Leader> :<C-u>Files<CR>
 	nnoremap <silent><Leader>ff       :<C-u>Files<CR>
@@ -25,6 +88,20 @@ if dein#tap('fzf.vim')
 	imap <c-x><c-f> <plug>(fzf-complete-path)
 	imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 	imap <c-x><c-l> <plug>(fzf-complete-line)
+endif
+
+if dein#tap('nerdtree')
+	let g:NERDTreeMapOpenSplit = 'sv'
+	let g:NERDTreeMapOpenVSplit = 'sg'
+	let g:NERDTreeMapOpenInTab = 'st'
+	let g:NERDTreeMapOpenInTabSilent = 'sT'
+	let g:NERDTreeMapUpdirKeepOpen = '<BS>'
+	let g:NERDTreeMapOpenRecursively = 't'
+	let g:NERDTreeMapCloseChildren = 'T'
+	let g:NERDTreeMapToggleHidden = '.'
+
+	nnoremap <silent> <Leader>op :<C-u>let NERDTreeWinPos=0 \| NERDTreeToggle<CR>
+	nnoremap <silent> <Leader>oP :<C-u>let NERDTreeWinPos=1 \| NERDTreeToggle<CR>
 endif
 
 if dein#tap('ale.vim')

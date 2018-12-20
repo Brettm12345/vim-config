@@ -4,11 +4,11 @@
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
 let g:NERDTreeCascadeOpenSingleChildDir = 1
+let g:NERDTreeHighlightCursorline = 1
 let g:NERDTreeCascadeSingleChildDir = 0
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 0
 let g:NERDTreeAutoDeleteBuffer = 0
-let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeHijackNetrw = 0
 let g:NERDTreeBookmarksFile = $VARPATH.'/treemarks'
 let NERDTreeIgnore = [
@@ -117,7 +117,7 @@ endfunction
 " Plugin: Create a new file or dir in path {{{
 " ---
 call NERDTreeAddKeyMap({
-	\ 'key': 'N',
+	\ 'key': 'c',
 	\ 'callback': s:SNR.'create_in_path',
 	\ 'quickhelpText': 'Create file or dir',
 	\ 'scope': 'Node' })
@@ -145,7 +145,7 @@ call NERDTreeAddKeyMap({
 	\ 'scope': 'Node' })
 
 function! s:find_in_path(node)
-	execute 'Denite file_rec:'.s:get_containing_dir(a:node)
+	execute 'Denite file/rec:'.s:get_containing_dir(a:node)
 endfunction
 
 function! s:grep_dir(node)

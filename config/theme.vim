@@ -5,7 +5,6 @@
 if has('termguicolors')
 	set termguicolors
 endif
-
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -13,7 +12,6 @@ if exists('+termguicolors')
 endif
 
 if has('gui_running')
-	set background=dark
 	set lines=40
 	set columns=150
 endif
@@ -34,7 +32,6 @@ autocmd MyAutoCmd ColorScheme * call s:theme_reload(g:theme_name)
 " COLORSCHEME NAME
 let s:cache = $VARPATH.'/theme.txt'
 if ! exists('g:colors_name')
-	set background=dark
 	execute 'colorscheme'
 		\ filereadable(s:cache) ? readfile(s:cache)[0] : 'hybrid'
 endif

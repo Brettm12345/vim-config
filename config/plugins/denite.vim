@@ -1,3 +1,4 @@
+" denite.nviet :
 " denite.nvim
 " -----------
 
@@ -5,9 +6,11 @@
 call denite#custom#option('_', {
 	\ 'prompt': 'λ:',
 	\ 'empty': 0,
+	\ 'cursor-shape': 1,
 	\ 'winheight': 16,
 	\ 'source_names': 'short',
 	\ 'vertical_preview': 1,
+	\ 'auto-preview': 1,
 	\ 'auto-accel': 1,
 	\ 'auto-resume': 1,
 	\ })
@@ -15,52 +18,71 @@ call denite#custom#option('_', {
 call denite#custom#option('list', {})
 
 call denite#custom#option('mpc', {
-	\ 'quit': 0,
 	\ 'mode': 'normal',
 	\ 'winheight': 20,
-	\ 'host': 'localhost',
-	\ 'port': 660
 	\ })
 
 " MATCHERS
-" Default is 'matcher_fuzzy'
-call denite#custom#source('tag', 'matchers', ['matcher_substring'])
+" Default is 'matcher/fuzzy'
+call denite#custom#source('tag', 'matchers', ['matcher/substring'])
 if has('nvim') && &runtimepath =~# '\/cpsm'
 	call denite#custom#source(
-		\ 'buffer,file/old,file/rec,grep,mpc,line',
+		\ 'buffer,file_mru,file_old,file/rec,grep,mpc,line',
 		\ 'matchers', ['matcher/cpsm', 'matcher/fuzzy'])
 endif
+
+" SORTERS
+" Default is 'sorter/rank'
+call denite#custom#source('z', 'sorters', ['sorter_z'])
 
 " CONVERTERS
 " Default is none
 call denite#custom#source(
-	\ 'buffer,file/old',
-	\ 'converters', ['converter/relative_word'])
+	\ 'buffer,file_mru,file_old',
+	\ 'converters', ['converter_relative_word'])
 
-call denite#custom#var('file/rec', 'command',
-	\ ['fd', '--type', 'f',
-	\ '--ignore-file', $HOME.'/.config/git/gitignore',
-	\ '--color', 'never',
-	\ '--follow', '--hidden', ''])
-call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#var('grep', 'default_opts',
-	\ ['--vimgrep', '--no-heading'])
+" FIND and GREP COMMANDS
+if executable('ag')
+	" The Silver Searcher
+	call denite#custom#var('file/rec', 'command',
+		\ ['ag', '-U', '--hidden', '--follow', '--nocolor', '-p', $HOME.'/.config/git/ignore', '--nogroup', '-g', ''])
+
+	" Setup ignore patterns in your .agignore file!
+	" https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
+
+	call denite#custom#var('grep', 'command', ['ag'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'pattern_opt', [])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('grep', 'default_opts',
+		\ [ '--skip-vcs-ignores', '--vimgrep', '--smart-case', '--hidden' ])
+
+elseif executable('ack')
+	" Ack command
+	call denite#custom#var('grep', 'command', ['ack'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'pattern_opt', ['--match'])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('grep', 'default_opts',
+			\ ['--ackrc', $HOME.'/.config/ackrc', '-H',
+			\ '--nopager', '--nocolor', '--nogroup', '--column'])
+endif
 
 " KEY MAPPINGS
 let insert_mode_mappings = [
 	\  ['jk', '<denite:enter_mode:normal>', 'noremap'],
 	\  ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
-	\  ['<C-J>', '<denite:move_to_next_line>', 'noremap'],
-	\  ['<C-K>', '<denite:move_to_previous_line>', 'noremap'],
 	\  ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
 	\  ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+	\  ['<C-j>', '<denite:move_to_next_line>', 'noremap'],
+	\  ['<C-k>', '<denite:move_to_previous_line>', 'noremap'],
 	\  ['<Up>', '<denite:assign_previous_text>', 'noremap'],
 	\  ['<Down>', '<denite:assign_next_text>', 'noremap'],
 	\  ['<C-Y>', '<denite:redraw>', 'noremap'],
+	\  ['<BS>', '<denite:smart_delete_char_before_caret>', 'noremap'],
+	\  ['<C-h>', '<denite:smart_delete_char_before_caret>', 'noremap'],
 	\ ]
 
 let normal_mode_mappings = [
