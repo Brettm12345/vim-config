@@ -10,8 +10,7 @@ let g:lightline = {
 			\ 'component_function': {
 			\   'filetype': 'MyFiletype',
 			\   'fileformat': 'MyFileformat',
-			\   'gitbranch': 'gitbranch#name',
-			\   'line_no_indicator': 'LineNoIndicator'
+			\   'gitbranch': 'gitbranch#name'
 			\ },
 			\ }
 " }}}

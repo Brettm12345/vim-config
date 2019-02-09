@@ -1,4 +1,3 @@
-
 " File Types
 "-------------------------------------------------
 
@@ -9,12 +8,12 @@ execute 'autocmd MyAutoCmd BufWritePost '.$VIMPATH.'/config/*,vimrc nested'
 
 augroup MyAutoCmd " {{{
 
-	" Reset the cursor when leaving vim
-	autocmd VimLeave * set guicursor=a:ver100-iCursor
-
 	" Highlight current line only on focused window
-	autocmd VimEnter,WinEnter,BufWinEnter,BufEnter,InsertLeave * set cursorline
+	autocmd WinEnter,InsertLeave * set cursorline
 	autocmd WinLeave,InsertEnter * set nocursorline
+
+	" Automatically set read-only for files being edited elsewhere
+	autocmd SwapExists * nested let v:swapchoice = 'o'
 
 	" Check if file changed when its window is focus, more eager than 'autoread'
 	autocmd WinEnter,FocusGained * checktime
@@ -41,29 +40,24 @@ augroup MyAutoCmd " {{{
 		\|   execute 'normal! g`"zvzz'
 		\| endif
 
-	" Disable paste and/or update diff when leaving insert mode
-	autocmd InsertLeave *
-		\ if &paste | setlocal nopaste mouse=a | echo 'nopaste' | endif |
-	\ if &l:diff | diffupdate | endif
-
 	autocmd TabLeave * let g:lasttab = tabpagenr()
 
 	autocmd FileType crontab setlocal nobackup nowritebackup
 
 	autocmd FileType css setlocal equalprg=csstidy\ -\ --silent=true
 
-	autocmd FileType docker-compose setlocal expandtab
+	autocmd FileType yaml.docker-compose setlocal expandtab
 
 	autocmd FileType gitcommit setlocal spell
 
 	autocmd FileType gitcommit,qfreplace setlocal nofoldenable
 
 	" https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write
-	autocmd FileType html,css,javascript,jsx,javascript.jsx setlocal backupcopy=yes
+	autocmd FileType css,javascript,jsx,javascript.jsx
+		\ setlocal backupcopy=yes
+		\| setlocal equalprg=jslint
 
 	autocmd FileType zsh setlocal foldenable foldmethod=marker
-
-	autocmd FileType fzf setlocal laststatus=0 noshowmode noruler
 
 	autocmd FileType html
 		\ setlocal path+=./;/
@@ -79,8 +73,8 @@ augroup MyAutoCmd " {{{
 
 	autocmd FileType cam setlocal nonumber synmaxcol=10000
 
-	autocmd FileType go highlight default link goErr WarningMsg |
-		\ match goErr /\<err\>/
+	" autocmd FileType go highlight default link goErr WarningMsg |
+	" 	\ match goErr /\<err\>/
 
 	autocmd FileType xml
 		\ setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
@@ -90,6 +84,10 @@ augroup END " }}}
 " Internal Plugin Settings  {{{
 " ------------------------
 
+" PHP {{{
+let g:PHP_removeCRwhenUnix = 0
+
+" }}}
 " Python {{{
 let g:python_highlight_all = 1
 
@@ -101,6 +99,15 @@ let g:vim_indent_cont = &shiftwidth
 " }}}
 " Bash {{{
 let g:is_bash = 1
+
+" }}}
+" Java {{{
+let g:java_highlight_functions = 'style'
+let g:java_highlight_all = 1
+let g:java_highlight_debug = 1
+let g:java_allow_cpp_keywords = 1
+let g:java_space_errors = 1
+let g:java_highlight_functions = 1
 
 " }}}
 " JavaScript {{{
@@ -116,9 +123,12 @@ let g:markdown_fenced_languages = [
 	\  'json=javascript',
 	\  'python',
 	\  'py=python',
+	\  'docker=Dockerfile',
+	\  'makefile=make',
 	\  'sh',
 	\  'sass',
 	\  'xml',
+	\  'yaml',
 	\  'vim'
 	\]
 
@@ -126,9 +136,12 @@ let g:markdown_fenced_languages = [
 " Folding {{{
 " augroup: a
 " function: f
+let g:vimsyn_folding = 'af'
 let g:tex_fold_enabled = 1
-let g:ft_man_folding_enable = 1
 let g:xml_syntax_folding = 1
+let g:php_folding = 2
+let g:php_phpdoc_folding = 1
+let g:perl_fold = 1
 " }}}
 " }}}
 

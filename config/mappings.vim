@@ -209,6 +209,10 @@ noremap  mj :m+<CR>
 nmap <silent> <Leader>se :<C-u>execute 'SessionSave' fnamemodify(resolve(getcwd()), ':p:gs?/?_?')<CR>
 nmap <silent> <Leader>os :<C-u>execute 'source '.g:session_directory.'/'.fnamemodify(resolve(getcwd()), ':p:gs?/?_?').'.vim'<CR>
 
+" Insert newlines above and below
+nmap <silent> ]<Space> o<esc>k
+nmap <silent> [<Space> O<esc>j
+
 " }}}
 
 " Display diff from last save {{{
@@ -241,6 +245,7 @@ nnoremap <silent> [Window]x  :<C-u>call <SID>BufferEmpty()<CR>
 " Split current buffer, go to previous window and previous buffer
 nnoremap <silent> [Window]sv :split<CR>:wincmd p<CR>:e#<CR>
 nnoremap <silent> [Window]sg :vsplit<CR>:wincmd p<CR>:e#<CR>
+
 
 function! WipeHiddenBuffers()
 	let tpbl=[]

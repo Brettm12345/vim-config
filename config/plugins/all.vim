@@ -4,26 +4,30 @@
 
 if dein#tap('denite.nvim')
 	nnoremap <silent><Leader>r :<C-u>Denite -resume -refresh<CR>
-	nnoremap <silent><Leader><Leader> :<C-u>Denite file/rec<CR>
-	nnoremap <silent><Leader>b :<C-u>Denite buffer file/old -default-action=switch<CR>
-	nnoremap <silent><Leader>d :<C-u>Denite directory_rec -default-action=cd<CR>
-	nnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register<CR>
-	xnoremap <silent><Leader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
-	nnoremap <silent><Leader>l :<C-u>Denite location_list -buffer-name=list<CR>
-	nnoremap <silent><Leader>q :<C-u>Denite quickfix -buffer-name=list<CR>
-	nnoremap <silent><Leader>n :<C-u>Denite dein<CR>
-	nnoremap <silent><Leader>g :<C-u>Denite grep<CR>
-	nnoremap <silent><Leader>j :<C-u>Denite jump change file/point<CR>
-	nnoremap <silent><Leader>u :<C-u>Denite junkfile:new junkfile<CR>
-	nnoremap <silent><Leader>o :<C-u>Denite outline<CR>
-	nnoremap <silent><Leader>s :<C-u>Denite session -buffer-name=list<CR>
-	nnoremap <silent><Leader>t :<C-u>Denite -buffer-name=tag tag:include<CR>
-	nnoremap <silent><Leader>p :<C-u>Denite -mode=normal jump<CR>
-	nnoremap <silent><Leader>h :<C-u>Denite help<CR>
-	nnoremap <silent><Leader>m :<C-u>Denite mpc -buffer-name=mpc<CR>
-	nnoremap <silent><Leader>/ :<C-u>Denite line<CR>
+	nnoremap <silent><Leader><Leader> :<C-u>DeniteProjectDir file/rec<CR>
+	nnoremap <silent><Leader>f. :<C-u>Denite file/rec<CR>
+	nnoremap <silent><Leader>. :<C-u>Denite file/rec<CR>
+	nnoremap <silent>fr :<C-u>Denite file/old<CR>
+	nnoremap <silent><Leader>bb :<C-u>Denite buffer -default-action=switch<CR>
+	nnoremap <silent><Leader>bB :<C-u>DeniteProjectDir buffer -default-action=switch<CR>
+	nnoremap <silent><Leader>fd :<C-u>Denite directory_rec -default-action=cd<CR>
+	nnoremap <silent><Leader>" :<C-u>Denite register -buffer-name=register<CR>
+	xnoremap <silent><Leader>" :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
+	nnoremap <silent><Leader>bl :<C-u>Denite location_list -buffer-name=list<CR>
+	nnoremap <silent><Leader>qq :<C-u>Denite quickfix -buffer-name=list<CR>
+	nnoremap <silent><Leader>hp :<C-u>Denite dein<CR>
+	nnoremap <silent><Leader>/p :<C-u>DeniteProjectDir grep<CR>
+	nnoremap <silent><Leader>jp :<C-u>Denite jump change file/point<CR>
+	nnoremap <silent><Leader>bx :<C-u>Denite junkfile:new junkfile<CR>
+	nnoremap <silent><Leader>/o :<C-u>Denite outline<CR>
+	nnoremap <silent><Leader><tab>l :<C-u>Denite session -buffer-name=list<CR>
+	nnoremap <silent><Leader>/t :<C-u>Denite -buffer-name=tag tag:include<CR>
+	nnoremap <silent><Leader>jj :<C-u>Denite -mode=normal jump<CR>
+	nnoremap <silent><Leader>hh :<C-u>Denite help<CR>
+	nnoremap <silent><Leader>mm :<C-u>Denite mpc -buffer-name=mpc<CR>
+	nnoremap <silent><Leader>/b :<C-u>Denite line<CR>
 	nnoremap <silent><Leader>* :<C-u>DeniteCursorWord line<CR>
-	nnoremap <silent><Leader>z :<C-u>Denite z<CR>
+	nnoremap <silent><Leader>fz :<C-u>Denite z<CR>
 	nnoremap <silent><Leader>; :<C-u>Denite command command_history<CR>
 
 	" chemzqm/denite-git
@@ -34,17 +38,24 @@ if dein#tap('denite.nvim')
 	" Open Denite with word under cursor or selection
 	nnoremap <silent> <Leader>gt :DeniteCursorWord -buffer-name=tag tag:include<CR>
 	nnoremap <silent> <Leader>gf :DeniteCursorWord file/rec<CR>
-	nnoremap <silent> <Leader>gg :DeniteCursorWord grep<CR>
-	vnoremap <silent> <Leader>gg
+	nnoremap <silent> <Leader>/p :DeniteCursorWord grep<CR>
+	vnoremap <silent> <Leader>/g
 		\ :<C-u>call <SID>get_selection('/')<CR>
-		\ :execute 'Denite grep:::'.@/<CR><CR>
+		\ :execute 'Denite -buffer-name=search grep:::'.@/<CR><CR>
 
 	function! s:get_selection(cmdtype)
 		let temp = @s
 		normal! gv"sy
 		let @/ = substitute(escape(@s, '\'.a:cmdtype), '\n', '\\n', 'g')
 		let @s = temp
-	endfunction "}}}
+	endfunction
+endif
+
+if dein#tap('Colorizer')
+	nnoremap <silent> <Leader>tr :ColorizerToggle
+endif
+if dein#tap('neoformat')
+	nnoremap <silent> <Leader>cf :Neoformat
 endif
 
 if dein#tap('vim-denite-z')
@@ -67,16 +78,16 @@ endif
 
 if dein#tap('fzf.vim')
 	nnoremap <silent><Leader><Leader> :<C-u>Files<CR>
-	nnoremap <silent><Leader>ff       :<C-u>Files<CR>
+	nnoremap <silent><Leader>f.       :<C-u>Files<CR>
 	nnoremap <silent><Leader>fg       :<C-u>GitFiles<CR>
 	nnoremap <silent><Leader>fr       :<C-u>History<CR>
 	nnoremap <silent><Leader>ft       :<C-u>Filetypes<CR>
-	nnoremap <silent><Leader>b        :<C-u>Buffers<CR>
+	nnoremap <silent><Leader>bb        :<C-u>Buffers<CR>
 	nnoremap <silent><Leader>gg       :<C-u>Rg<CR>
 	nnoremap <silent><Leader>:        :<C-u>Commands<CR>
 	nnoremap <silent><Leader>tt       :<C-u>Tags<CR>
 	nnoremap <silent><Leader>tb       :<C-u>BTags<CR>
-	nnoremap <silent><Leader>w        :<C-u>Windows<CR>
+	nnoremap <silent><Leader>ww        :<C-u>Windows<CR>
 
 	" Mapping selecting mappings
 	nmap <Leader><tab> <plug>(fzf-maps-n)
@@ -167,8 +178,8 @@ if dein#tap('vim-edgemotion')
 endif
 
 if dein#tap('vim-sidemenu')
-	nmap <Localleader>l <Plug>(sidemenu)
-	xmap <Localleader>l <Plug>(sidemenu-visual)
+	nmap <Leader>om <Plug>(sidemenu)
+	xmap <Leader>om <Plug>(sidemenu-visual)
 endif
 
 if dein#tap('vim-indent-guides')
@@ -203,27 +214,27 @@ if dein#tap('jedi-vim')
 	let g:jedi#completions_command = ''
 	let g:jedi#documentation_command = 'K'
 	let g:jedi#goto_command = '<C-]>'
-	let g:jedi#goto_assignments_command = '<Leader>g'
-	let g:jedi#rename_command = '<Leader>r'
-	let g:jedi#usages_command = '<Leader>n'
+	let g:jedi#goto_assignments_command = '<Localleader>g'
+	let g:jedi#rename_command = '<Localleader>r'
+	let g:jedi#usages_command = '<Localleader>n'
 endif
 
 if dein#tap('tern_for_vim')
 	autocmd MyAutoCmd FileType javascript,jsx,javascript.jsx
 		\  nnoremap <silent><buffer> K          :<C-u>TernDoc<CR>
 		\| nnoremap <silent><buffer> <C-]>      :<C-u>TernDef<CR>
-		\| nnoremap <silent><buffer> <Leader>g  :<C-u>TernType<CR>
-		\| nnoremap <silent><buffer> <Leader>n  :<C-u>TernRefs<CR>
-		\| nnoremap <silent><buffer> <Leader>r  :<C-u>TernRename<CR>
+		\| nnoremap <silent><buffer> <Localleader>g  :<C-u>TernType<CR>
+		\| nnoremap <silent><buffer> <Localleader>n  :<C-u>TernRefs<CR>
+		\| nnoremap <silent><buffer> <Localleader>r  :<C-u>TernRename<CR>
 endif
 
 if dein#tap('vim-signify')
-	nmap <Leader>]g <Plug>(signify-next-hunk)
-	nmap <Leader>[g <Plug>(signify-prev-hunk)
+	nmap ]g <Plug>(signify-next-hunk)
+	nmap [g <Plug>(signify-prev-hunk)
 end
 
 if dein#tap('vimagit')
-	nnoremap <silent> mg :Magit<CR>
+	nnoremap <silent> <Leader>gg :Magit<CR>
 endif
 
 if dein#tap('vim-easygit')
@@ -286,8 +297,6 @@ if dein#tap('dsf.vim')
 endif
 
 if dein#tap('vim-commentary')
-	xmap <Leader>v  <Plug>Commentary
-	nmap <Leader>v  <Plug>CommentaryLine
 	xmap gc  <Plug>Commentary
 	nmap gc  <Plug>Commentary
 	omap gc  <Plug>Commentary

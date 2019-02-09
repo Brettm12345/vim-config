@@ -2,7 +2,7 @@
 " NERDTree
 " --------
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 30
 let g:NERDTreeCascadeOpenSingleChildDir = 1
 let g:NERDTreeHighlightCursorline = 1
 let g:NERDTreeCascadeSingleChildDir = 0
@@ -15,13 +15,6 @@ let NERDTreeIgnore = [
 	\ '\.git$', '\.hg$', '\.svn$', '\.stversions$', '\.pyc$', '\.svn$',
 	\ '\.DS_Store$', '\.sass-cache$', '__pycache__$', '\.egg-info$', '\.cache$'
 	\ ]
-
-autocmd MyAutoCmd FileType nerdtree call s:nerdtree_settings()
-
-function! s:nerdtree_settings() abort
-	setlocal expandtab " Enabling vim-indent-guides
-	vertical resize 25
-endfunction
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer

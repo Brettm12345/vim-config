@@ -7,7 +7,11 @@
 let &t_ti .= "\e[?2004h"
 let &t_te .= "\e[?2004l"
 let &pastetoggle = "\e[201~"
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
 
+set guicursor+=i:blinkwait10
 function! s:XTermPasteBegin(ret) abort
 	setlocal paste
 	return a:ret

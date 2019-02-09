@@ -33,7 +33,7 @@ autocmd MyAutoCmd ColorScheme * call s:theme_reload(g:theme_name)
 let s:cache = $VARPATH.'/theme.txt'
 if ! exists('g:colors_name')
 	execute 'colorscheme'
-		\ filereadable(s:cache) ? readfile(s:cache)[0] : 'hybrid'
+		\ filereadable(s:cache) ? readfile(s:cache)[0] : 'palenight'
 endif
 
 " vim: set ts=2 sw=2 tw=80 noet :

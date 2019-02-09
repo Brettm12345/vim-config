@@ -1,4 +1,3 @@
-" denite.nviet :
 " denite.nvim
 " -----------
 
@@ -6,7 +5,7 @@
 call denite#custom#option('_', {
 	\ 'prompt': 'λ:',
 	\ 'empty': 0,
-	\ 'cursor-shape': 1,
+	\ 'cursor-shape': 0,
 	\ 'winheight': 16,
 	\ 'source_names': 'short',
 	\ 'vertical_preview': 1,
@@ -27,7 +26,7 @@ call denite#custom#option('mpc', {
 call denite#custom#source('tag', 'matchers', ['matcher/substring'])
 if has('nvim') && &runtimepath =~# '\/cpsm'
 	call denite#custom#source(
-		\ 'buffer,file_mru,file_old,file/rec,grep,mpc,line',
+		\ 'buffer,file_mru,file_old,file/rec,file/old,file/mru,grep,mpc,line',
 		\ 'matchers', ['matcher/cpsm', 'matcher/fuzzy'])
 endif
 
@@ -45,7 +44,11 @@ call denite#custom#source(
 if executable('ag')
 	" The Silver Searcher
 	call denite#custom#var('file/rec', 'command',
-		\ ['ag', '-U', '--hidden', '--follow', '--nocolor', '-p', $HOME.'/.config/git/ignore', '--nogroup', '-g', ''])
+		\ ['ag', '-U', '--hidden', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+	call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+	call denite#custom#var('file/rec/git', 'command',
+	      \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
 	" Setup ignore patterns in your .agignore file!
 	" https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
